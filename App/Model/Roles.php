@@ -1,67 +1,59 @@
 <?php
-        namespace App\Model;
-        use App\Utils\BddConnect;
-        class Roles extends BddConnect{
+    namespace App\Model;
+    use App\Utils\BddConnect;
+    class Roles extends BddConnect{
+        /*-----------------------
+                Attributs
+        ------------------------*/
+        private $id_roles;
+        private $nom_roles;
+        /*-----------------------
+                Constructeur
+        ------------------------*/
+        public function __construct($name){
+            $this->id_roles = 1;
+            $this->nom_roles = $name;
+        }
+        /*-----------------------
+            Getter et Setters
+        ------------------------*/
+        public function getIdRoles():?int{
+            return $this->id_roles;
+        }
+        public function getNomRoles():?string{
+            return $this->nom_roles;
+        }
+        public function setNomRoles($name):void{
+            $this->nom_roles = $name;
+        }
+    
+        public function addRole() {
 
-                // --------------------------
-                //     Attributs
-                // --------------------------
 
-                private $id_roles;
-                private $nom_roles;
-
-
-                // --------------------------
-                //     Constructeur
-                // --------------------------
-
-                public function __construct($name) {
-
-                    $this->id_roles = 1;
-                    $this->nom_roles = $name;
-                }
-
-
-
-                    
-                // --------------------------
-                //     Getter and Setters
-                // --------------------------
-
-
-                public function getIdRoles():?int {
-
-                    return $this->id_roles;
-                } 
+          
+            try {
                 
-                public function getNomRoles():?string {
 
-                    return $this->nom_roles;
-                }
+                $role = $this->nom_roles;
+
                 
-                public function setNomRoles($name):?void {
-
-                    return $this->nom_roles = $name;
-                }
-
+                $req = $this->connexion()->prepare("INSERT INTO roles (nom_roles) VALUES (?)");
+                
+                $req->bindParam(1, $role, \PDO::PARAM_STR);
+                
+                $req->execute();
+               
             
+               
+            }
+            //gestion des erreurs (Exception)
+            catch (\Exception $e){
 
+                //affichage de l'erreur
+                die('Erreur : '.$e->getMessage());
+            }
 
-
-
-         }
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
+    }
 
 ?>

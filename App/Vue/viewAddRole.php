@@ -8,7 +8,15 @@
 </head>
 <body>
     
-<h1>Erreur </h1>
+
+<form method="post" action="">
+  <label for="nom_roles">Nom du rôle :</label>
+  <input type="text" id="nom_roles" name="nom_roles" required>
+  <input type="submit" name="submit" value="Ajouter">
+</form>
+
+
+
 
 </body>
 </html>
